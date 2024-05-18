@@ -11,21 +11,21 @@ Original file is located at
 #  Grupo N°7 - Cohorte 2022 - TSCDIA
 </br>
 
-## Prediccion de Glaucoma
+## Deteccion de Glaucoma
 </br>
 
-### Profesores:
+## Profesores:
 
-#### - Facundo Cuneo
-#### - Carlos Charletti
-#### - Moises Tinte
+### - Facundo Cuneo
+### - Carlos Charletti
+### - Moises Tinte
 </br>
 
-### Integrantes
+## Integrantes
 
 
-| Nombre          | Apellido            | GitHub                                                |  |
-|-----------------|---------------------|-------------------------------------------------------|------|
+| Nombre          | Apellido            | GitHub                                                |  
+|-----------------|---------------------|-------------------------------------------------------|
 | Jon Francis     | Perez               | [jfperez-data](https://github.com/jfperez-data)       |
 | Juan Diego      | González Antoniazzi | [JDGA1997](https://github.com/JDGA1997)               |
 | Maximiliano     | Pantaleff           | [Maxi-009](https://github.com/Maxi-009)               |
@@ -34,9 +34,9 @@ Original file is located at
 
 </br>
 
-### GitHub
+## GitHub
 
-[Grupo-7_PP1](https://github.com/JDGA1997/Grupo-7-TSCDIA)
+[Grupo-7-TSCDIA](https://github.com/JDGA1997/Grupo-7-TSCDIA)
 
 </br>
 
@@ -45,7 +45,7 @@ Original file is located at
 
 </br>
 
-### Trello
+## Trello
 
 [Grupo N°7](https://trello.com/b/eatyLr9U/grupo-n7-tscdia-2024)
 """
