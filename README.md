@@ -43,6 +43,8 @@
 
 ##
 
+
+
 ## Como ejecutarla?
 -Instalar las librerías necesarias de la siguiente forma:
 pip install Pillow, Tensorflow, keras, keras.utils, Speach_recognition, Tkinter, pyaudio
