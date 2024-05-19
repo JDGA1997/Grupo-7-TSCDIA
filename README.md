@@ -41,6 +41,7 @@
 
 [Grupo N°7](https://trello.com/b/eatyLr9U/grupo-n7-tscdia-2024)
 
+##
 
 ## Como ejecutarla?
 -Instalar las librerías necesarias de la siguiente forma:
@@ -49,10 +50,14 @@ pip install Pillow, Tensorflow, keras, keras.utils, Speach_recognition, Tkinter,
 -Luego ejecuta la interfaz desde la consola integrada o desde el CMD posicionado en la carpeta del proyecto:
 python interfase.py
 
+
 ## Funcionalidades.
 -Entrenar el modelo: primer paso en la ejecución de la aplicación. Esto generará el modelo que luego se utilizará para cotejar con las imágenes cargadas manualmente o por instrucción de voz.
+
 -Validar el modelo: una vez entrenado el modelo, se realiza la validación.
+
 -Cargar imágen: una vez realizado los pasos anteriores, se carga una imagen de una TOMOGRAFIA DE COHERENCIA OPTICA (OCT) de la Retina del Ojo para constatar si en la misma el paciente presenta o no Glaucoma
+
 -Búsqueda por voz: puede solicitarle a la aplicación que cargue la imágen mediante instrucción hablada.
 
 
