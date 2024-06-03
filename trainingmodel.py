@@ -57,7 +57,7 @@ def entrenar_modelo():
         ])
 
         model.compile(
-            optimizer=tf.keras.optimizers.Adam(learning_rate=0.0002),
+            optimizer=tf.keras.optimizers.Adam(learning_rate=0.0003),  #0.0002
             loss='categorical_crossentropy',
             metrics=['accuracy']
         )
@@ -76,7 +76,7 @@ def entrenar_modelo():
 
     for train, test in kfold.split(X, y):
         model = crear_modelo()
-        history = model.fit(X[train], y[train], epochs=20, batch_size=32, verbose=1, validation_data=(X[test], y[test]))
+        history = model.fit(X[train], y[train], epochs=10, batch_size=32, verbose=1, validation_data=(X[test], y[test]))
 
         scores = model.evaluate(X[test], y[test], verbose=0)
         print(f"Score for fold {fold_no}: {model.metrics_names[0]} of {scores[0]}; {model.metrics_names[1]} of {scores[1]}")
@@ -171,3 +171,67 @@ def predecir_con_modelo_entrenado(model_path, path_image):
     predicted_class = np.argmax(predictions, axis=1).item()
     print("Predicted class:", predicted_class)
     return predicted_class
+
+
+# # Rutas de los directorios de entrenamiento y validación
+# path_training = "Database/Glaucoma_Training"
+# path_validation = "Database/Glaucoma_Validacion"
+
+# # Cargar y preprocesar los datos de entrenamiento y validación
+# train_datagen = keras.preprocessing.image.ImageDataGenerator(
+#     rescale=1./255,
+#     rotation_range=20,
+#     width_shift_range=0.2,
+#     height_shift_range=0.2,
+#     shear_range=0.2,
+#     zoom_range=0.2,
+#     horizontal_flip=True,
+#     fill_mode='nearest'
+# )
+
+# train_generator = train_datagen.flow_from_directory(
+#     path_training,
+#     target_size=(256, 256),
+#     batch_size=32,
+#     class_mode='categorical',
+#     shuffle=True
+# )
+
+# validation_datagen = keras.preprocessing.image.ImageDataGenerator(rescale=1./255)
+
+# validation_generator = validation_datagen.flow_from_directory(
+#     path_validation,
+#     target_size=(256, 256),
+#     batch_size=32,
+#     class_mode='categorical',
+#     shuffle=False
+# )
+
+# # Cargar ResNet50 pre-entrenado
+# base_model = keras.applications.ResNet50(weights='imagenet', include_top=False)
+
+# # Agregar capas personalizadas
+# x = base_model.output
+# x = layers.GlobalAveragePooling2D()(x)
+# x = layers.Dense(128, activation='relu')(x)
+# predictions = layers.Dense(2, activation='softmax')(x)  # Suponiendo dos clases (glaucoma y no glaucoma)
+
+# model = keras.Model(inputs=base_model.input, outputs=predictions)
+
+# # Congelar las capas base de ResNet50
+# for layer in base_model.layers:
+#     layer.trainable = False
+
+# # Compilar el modelo
+# model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
+
+# # Entrenar el modelo
+# model.fit(train_generator, epochs=20, validation_data=validation_generator)
+
+# # Evaluar el modelo
+# test_loss, test_accuracy = model.evaluate(validation_generator)
+# print("Test accuracy:", test_accuracy)
+# print("Test loss:", test_loss)
+
+# # Guardar el modelo entrenado
+# model.save('my_model_with_resnet.h5')

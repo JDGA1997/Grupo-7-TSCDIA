@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 import os
 
 # Ruta a la carpeta con imágenes
-carpeta_imagenes = 'ruta/a/tu/carpeta'
+carpeta_imagenes = 'Database/Glaucoma_Training'
 
 # Inicializar un array para almacenar el histograma global
 histograma_global = np.zeros(256)
