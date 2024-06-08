@@ -148,16 +148,17 @@ Despliegue e implementación. Informe final terminado
   
 </details>
 
+<br>
+
 ## Profesores:
 
 ### - Facundo Cuneo
 ### - Carlos Charletti
 ### - Moises Tinte
-</br>
 
-<h1 align="center"> 
-  👩‍💻👨🏼‍💻 Integrantes 👩‍💻👨🏼‍💻
-</h1>
+<br>
+
+## Integrantes:
 <h3 align="center">Project Manager</h3>
     <dl>
       <dd>
