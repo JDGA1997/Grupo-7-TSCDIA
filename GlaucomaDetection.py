@@ -1,5 +1,5 @@
 # Librerías necesarias
-from PIL import Image
+from Pillow import Image
 import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras import layers
