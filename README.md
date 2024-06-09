@@ -377,6 +377,7 @@ Despliegue e implementación. Informe final terminado
       <th>Lenguaje de programación</th>
       <th>IDE</th>
       <th>Gestión de Tareas</th>
+      <th>Control de Versiones </th>
       <th>Trabajo Colaborativo</th>
       <th>DataSet</th>
     </tr>
@@ -391,6 +392,9 @@ Despliegue e implementación. Informe final terminado
       </td>
       <td>
         <img alt="Trello" src="https://img.shields.io/badge/Trello-%23026AA7.svg?style=for-the-badge&logo=Trello&logoColor=white">
+      </td>
+      <td>
+        <img alt="GitHub" src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white">
       </td>
       <td>
         <img alt="Google Drive" src="https://img.shields.io/badge/Google%20Drive-4285F4?style=for-the-badge&logo=googledrive&logoColor=white">
@@ -417,5 +421,23 @@ Despliegue e implementación. Informe final terminado
 ## Trello
 
 [Grupo N°7](https://trello.com/b/eatyLr9U/grupo-n7-tscdia-2024)
+
+</br>
+
+## Propuesta de Negocio
+
+[Detección y Diagnóstico de Glaucoma Con IA](https://deteccion-y-diagnostico--t8nerig.gamma.site/)
+
+</br>
+
+## Presentacion Proyecto Final
+
+[Propuesta de Proyecto](https://github.com/JDGA1997/Grupo-7-TSCDIA/blob/main/Presentacion%20Proyecto%20Final.pdf)
+
+</br>
+
+## Video Presentacion Proyecto Final
+
+[Video Presentacion](https://drive.google.com/file/d/17b0a-iOwaWJc1vsB3MrC6C_nH7sr0XQl/view?usp=sharing)
 
 </div>
