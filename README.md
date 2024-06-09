@@ -142,7 +142,7 @@ En general, los resultados de los procesos de formación y evaluación proporcio
 </details>
 
 <details>
-<summary>Etapa 6: Informe / Plan de Despliegue</summary>
+<summary>Etapa 7: Informe / Plan de Despliegue</summary>
 
 Despliegue e implementación. Informe final terminado
   
