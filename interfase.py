@@ -3,6 +3,9 @@ from tkinter import filedialog, messagebox, Toplevel
 import os
 import trainingmodel as model
 import speech_recognition as sr
+import matplotlib as plt
+
+model_path = "my_model.h5"
 
 # Función para entrenar el modelo desde la interfaz
 def entrenar_modelo_interfaz():
@@ -11,7 +14,6 @@ def entrenar_modelo_interfaz():
     messagebox.showinfo("Éxito", "Modelo entrenado correctamente")
 
 def evaluar_modelo_interfaz():
-    model_path = "my_model.h5"
     model.evaluar_modelo(model_path)
     messagebox.showinfo("Éxito", "Modelo evaluado correctamente")
 
@@ -26,13 +28,9 @@ def cargar_imagenes():
     predecir_con_modelo(path_image)
 
 def predecir_con_modelo(path_image):
-    model_path = 'my_model.h5'
     if not os.path.exists(model_path):
         messagebox.showwarning("Advertencia", "Debe entrenar el modelo antes de utilizarlo")
         return
-
-    # Cargar el modelo entrenado
-    model_path = 'my_model.h5'
 
     result = model.predecir_con_modelo_entrenado(model_path, path_image)
     if result:

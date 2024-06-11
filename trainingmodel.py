@@ -1,6 +1,12 @@
 import tensorflow as tf
 from tensorflow import keras
 from keras import layers
+from tensorflow.keras import regularizers
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Conv2D,MaxPooling2D, Flatten, Dense, Input, Dropout, Activation, BatchNormalization
+from tensorflow.keras.regularizers import l2
+from tensorflow.keras.preprocessing.image import ImageDataGenerator
+from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint, ReduceLROnPlateau
 from sklearn.metrics import confusion_matrix, precision_score, recall_score, f1_score, roc_auc_score
 from sklearn.model_selection import KFold
 import numpy as np
@@ -10,6 +16,7 @@ def entrenar_modelo():
 
     path_training = "Database/Glaucoma_Training"
 
+    #Data augmentation
     datagen = tf.keras.preprocessing.image.ImageDataGenerator(
         rescale=1./255,
         validation_split=0.2,
@@ -19,14 +26,15 @@ def entrenar_modelo():
         shear_range=0.2,
         zoom_range=0.2,
         horizontal_flip=True,
-        fill_mode='nearest'
+        fill_mode='nearest',
+        brightness_range=[0.4,1.5]
     )
 
     data_generator = datagen.flow_from_directory(
         path_training,
-        target_size=(256, 256),
-        batch_size=32,
-        class_mode='categorical',
+        target_size=(224, 224),
+        batch_size=16,
+        class_mode='binary',
         shuffle=True
         )
     
@@ -44,26 +52,62 @@ def entrenar_modelo():
     # Crear y compilar el modelo
     def crear_modelo():
         model = tf.keras.Sequential([
-            layers.Conv2D(32, (3,3), activation='relu', input_shape=(256, 256, 3)),
-            layers.MaxPooling2D(),
-            layers.Conv2D(64, 3, activation='relu'),
-            layers.MaxPooling2D(),
-            layers.Conv2D(128, 3, activation='relu'),
-            layers.MaxPooling2D(),
+            layers.Input(shape=(224, 224, 3)),
+            layers.Conv2D(32, kernel_size=(3,3), padding='same', kernel_regularizer=regularizers.l2(0.01), activation='relu'),
+            layers.BatchNormalization(),
+            layers.MaxPooling2D(pool_size=(2,2)),
+            layers.Dropout(0.25),
+            layers.Conv2D(64, kernel_size=(3,3), padding='same', kernel_regularizer=regularizers.l2(0.01),  activation='relu'),
+            layers.BatchNormalization(),
+            layers.MaxPooling2D(pool_size=(2,2)),
+            layers.Dropout(0.25),
+            layers.Conv2D(128, kernel_size=(3,3), padding='same', kernel_regularizer=regularizers.l2(0.01),  activation='relu'),
+            layers.BatchNormalization(),
+            layers.MaxPooling2D(pool_size=(2,2)),
+            layers.Dropout(0.5),
             layers.Flatten(),
-            layers.Dense(128, activation='relu'),
-            layers.Dropout(0.5),  # Regularización
-            layers.Dense(2, activation='softmax')
+            layers.Dense(64, activation='relu'),
+            layers.Dropout(0.5),
+            layers.Dense(1, activation='sigmoid')
         ])
 
         model.compile(
-            optimizer=tf.keras.optimizers.Adam(learning_rate=0.0003),  #0.0002
-            loss='categorical_crossentropy',
+            optimizer=tf.keras.optimizers.Adam(learning_rate=0.00001),  #0.0002
+            loss='binary_crossentropy',
             metrics=['accuracy']
         )
+
         return model
 
-    # Validación cruzada
+
+ #Definir callback
+    early_stopping = tf.keras.callbacks.EarlyStopping(
+        monitor='val_loss',
+        patience=10,
+        verbose=1,
+        restore_best_weights=True
+    )
+
+    model_checkpoint = tf.keras.callbacks.ModelCheckpoint(
+        'best_model.model.keras',
+        monitor='accuracy',
+        mode='max',
+        save_best_only=True,
+        verbose=1
+    )
+
+    reduce_lr = tf.keras.callbacks.ReduceLROnPlateau(
+        monitor='val_loss',
+        factor=0.1,
+        patience=3,
+        verbose=1,
+        min_lr=1e-6
+    )
+
+    # Guardar mejor desempeño de modelo obtenido
+    model = model_checkpoint
+
+    # Validación cruzada    
     num_folds = 5
     kfold = KFold(n_splits=num_folds, shuffle=True)
     fold_no = 1
@@ -74,9 +118,14 @@ def entrenar_modelo():
     f1s = []
     aucs = []
 
+    
     for train, test in kfold.split(X, y):
         model = crear_modelo()
-        history = model.fit(X[train], y[train], epochs=10, batch_size=32, verbose=1, validation_data=(X[test], y[test]))
+        history = model.fit(X[train], y[train], 
+                            epochs=30, batch_size=16, 
+                            callbacks=[early_stopping, model_checkpoint, reduce_lr], 
+                            verbose=1, 
+                            validation_data=(X[test], y[test]))
 
         scores = model.evaluate(X[test], y[test], verbose=0)
         print(f"Score for fold {fold_no}: {model.metrics_names[0]} of {scores[0]}; {model.metrics_names[1]} of {scores[1]}")
@@ -84,13 +133,13 @@ def entrenar_modelo():
         losses.append(scores[0])
 
         y_pred = model.predict(X[test])
-        y_pred_labels = np.argmax(y_pred, axis=1)
-        y_true_labels = np.argmax(y[test], axis=1)
+        y_pred_labels = (y_pred > 0.5).astype(int)  # Convertir probabilidades a etiquetas binarias
+        y_true_labels = y[test].astype(int)
 
         precision = precision_score(y_true_labels, y_pred_labels, average='weighted')
         recall = recall_score(y_true_labels, y_pred_labels, average='weighted')
         f1 = f1_score(y_true_labels, y_pred_labels, average='weighted')
-        auc = roc_auc_score(y[test], y_pred, multi_class='ovr')
+        auc = roc_auc_score(y[test], y_pred)
 
         precisions.append(precision)
         recalls.append(recall)
@@ -111,20 +160,22 @@ def entrenar_modelo():
     print(f"Average F1-Score: {np.mean(f1s)}")
     print(f"Average AUC: {np.mean(aucs)}")
 
-    model.save('my_model.h5')
+    model.save('my_model.keras')
+
 
 def evaluar_modelo(model_path):
     print("Evaluando el modelo...")
 
     path_validation = "Database/Glaucoma_Validacion"
+    
 
     datagen = tf.keras.preprocessing.image.ImageDataGenerator(rescale=1./255)
 
     val_ds = datagen.flow_from_directory(
         path_validation,
-        target_size=(256, 256),
-        batch_size=32,
-        class_mode='categorical',
+        target_size=(224, 224),
+        batch_size=16,
+        class_mode='binary',
         shuffle=False
     )
 
@@ -135,8 +186,8 @@ def evaluar_modelo(model_path):
     
     # Predicciones y etiquetas verdaderas
     y_pred = model.predict(val_ds)
-    y_pred_labels = np.argmax(y_pred, axis=1)
-    y_true_labels = val_ds.classes
+    y_pred_labels = (y_pred > 0.5).astype(int)  # Convertir probabilidades a etiquetas binarias
+    y_true_labels = val_ds.labels.astype(int)
 
     # Calcular matriz de confusión
     cm = confusion_matrix(y_true_labels, y_pred_labels)
@@ -149,7 +200,7 @@ def evaluar_modelo(model_path):
     f1 = f1_score(y_true_labels, y_pred_labels, average='weighted')
     y_pred_prob = model.predict(val_ds)
     y_true = val_ds.classes
-    roc_auc = roc_auc_score(y_true, y_pred_prob[:, 1])  # Suponiendo que la clase positiva es la segunda
+    roc_auc = roc_auc_score(y_true, y_pred_prob)
 
     print(f"Test accuracy: {test_acc}")
     print(f"Test loss: {test_loss}")
@@ -159,7 +210,7 @@ def evaluar_modelo(model_path):
     print(f"F1-score: {f1}")
     print(f"ROC AUC: {roc_auc}")
 
-    return test_acc, test_loss, cm, precision, recall, f1, roc_auc
+    return test_acc, test_loss, cm, precision, recall, f1, roc_auc 
 
 def predecir_con_modelo_entrenado(model_path, path_image):
     model = tf.keras.models.load_model(model_path)
@@ -168,7 +219,7 @@ def predecir_con_modelo_entrenado(model_path, path_image):
     img_array = np.expand_dims(img_array, 0)  # Expande las dimensiones para que coincida con el formato de entrada del modelo
 
     predictions = model.predict(img_array)
-    predicted_class = np.argmax(predictions, axis=1).item()
+    predicted_class = np.argmax(predictions, axis=0).item()
     print("Predicted class:", predicted_class)
     return predicted_class
 
