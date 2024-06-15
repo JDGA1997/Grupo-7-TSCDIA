@@ -415,8 +415,8 @@ Despliegue e implementación. Informe final terminado
 
 #### Instrucciones para ejecutar la aplicación:
 <details>
-<summary>1. Python instalado:</summary>
-Revisar instrucciones específicas según sistema operativo.
+<summary>1. Python y Git instalados:</summary>
+Revisar instrucciones respectivas según sistema operativo.
 </details>
 <details>
 <summary>2. Instalar/Actualizar pip:</summary>
