@@ -411,8 +411,6 @@ Despliegue e implementación. Informe final terminado
 
 [Grupo-7-TSCDIA](https://github.com/JDGA1997/Grupo-7-TSCDIA)
 
-</br>
-
 #### Instrucciones para ejecutar la aplicación:
 <details>
 <summary>1. Python y Git instalados:</summary>
