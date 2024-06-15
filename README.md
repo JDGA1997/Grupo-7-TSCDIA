@@ -450,8 +450,8 @@ Cuando hayas terminado de trabajar en el entorno virtual, puedes desactivarlo ej
 #bash
 </br>
 <b>deactivate</b>
-<details>
 </details>
+<details>
 <summary>5. Clonar repositorio:</summary>
 Situarse en directorio deseado y ejecutar:
 </br>
