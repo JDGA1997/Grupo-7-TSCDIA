@@ -413,6 +413,70 @@ Despliegue e implementación. Informe final terminado
 
 </br>
 
+#### Instrucciones para ejecutar la aplicación:
+</br>
+<details>
+<summary>1. Python instalado:</summary>
+Revisar instrucciones específicas según sistema operativo.
+</details>
+<details>
+<summary>2. Instalar/Actualizar pip:</summary>
+#bash
+</br>
+python -m pip install --upgrade pip
+</br>
+</details>
+<details>
+<summary>3. Crear un Entorno Virtual (venv):</summary>
+#bash
+</br>
+python -m venv nombre_del_entorno
+</details>
+<details>
+<summary>4a. Activar el Entorno Virtual:</summary>
+#bash
+</br>
+source nombre_del_entorno/Scripts/activate
+</br>
+Si estás en un entorno Unix -Linux o Mac-, el comando es ligeramente diferente:
+</br>
+#bash
+</br>
+source nombre_del_entorno/bin/activate
+</details>
+<details>
+<summary>4b. Desactivar el Entorno Virtual:</summary>
+Cuando hayas terminado de trabajar en el entorno virtual, puedes desactivarlo ejecutando el siguiente comando en Git Bash:
+</br>
+#bash
+</br>
+deactivate
+</details>
+<details>
+<summary>5. Clonar repositorio:</summary>
+Situarse en directorio deseado y ejecutar:
+</br>
+#bash
+</br>
+git init
+</br>
+git clone https://github.com/JDGA1997/Grupo-7-TSCDIA.git 
+</details>
+<details>
+<summary>6. Instalar librerías necesarias:</summary>
+#bash
+</br>
+pip3 install -r requirements.txt
+</details>
+<details>
+<summary>7. Ejecutar la aplicación:</summary>
+#bash
+</br>
+python interfase.py
+</details>
+
+</br>
+
 ## Dataset
 [Glaucoma Detection](https://www.kaggle.com/datasets/sshikamaru/glaucoma-detection)
 
@@ -432,6 +496,9 @@ Despliegue e implementación. Informe final terminado
 
 ## Documentación y Métricas de finalización del entrenamiento
 [Proyecto de Detección y Diagnóstico de Glaucoma mediante Reconocimiento de Imágenes](https://docs.google.com/document/d/1_dSYme9N4rrXjYyyXZrSUVqGUdnpOQko/edit?usp=sharing&ouid=107703170915842902716&rtpof=true&sd=true)
+
+</br>
+
 [Resultado final del entrenamiento](https://docs.google.com/document/d/1AJG_4MdIPQPpdJXfLfMrZI-RbJU56656/edit?usp=sharing&ouid=107703170915842902716&rtpof=true&sd=true)
 
 </br>
