@@ -430,6 +430,12 @@ Despliegue e implementación. Informe final terminado
 
 </br>
 
+## Documentación y Métricas de finalización del entrenamiento
+[Proyecto de Detección y Diagnóstico de Glaucoma mediante Reconocimiento de Imágenes](https://docs.google.com/document/d/1_dSYme9N4rrXjYyyXZrSUVqGUdnpOQko/edit?usp=sharing&ouid=107703170915842902716&rtpof=true&sd=true)
+[Resultado final del entrenamiento](https://docs.google.com/document/d/1AJG_4MdIPQPpdJXfLfMrZI-RbJU56656/edit?usp=sharing&ouid=107703170915842902716&rtpof=true&sd=true)
+
+</br>
+
 ## Presentacion Proyecto Final
 
 [Propuesta de Proyecto](https://github.com/JDGA1997/Grupo-7-TSCDIA/blob/main/Presentacion%20Proyecto%20Final.pdf)
