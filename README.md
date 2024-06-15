@@ -414,50 +414,65 @@ Despliegue e implementación. Informe final terminado
 </br>
 
 #### Instrucciones para ejecutar la aplicación:
-</br>
+<details>
 <summary>1. Python instalado:</summary>
 Revisar instrucciones específicas según sistema operativo.
+</details>
+<details>
 <summary>2. Instalar/Actualizar pip:</summary>
 #bash
 </br>
-python -m pip install --upgrade pip
+**python -m pip install --upgrade pip**
 </br>
+</details>
+<details>
 <summary>3. Crear un Entorno Virtual (venv):</summary>
 #bash
 </br>
-python -m venv nombre_del_entorno
+**python -m venv nombre_del_entorno**
+</details>
+<details>
 <summary>4a. Activar el Entorno Virtual:</summary>
 #bash
 </br>
-source nombre_del_entorno/Scripts/activate
+**source nombre_del_entorno/Scripts/activate**
 </br>
 Si estás en un entorno Unix -Linux o Mac-, el comando es ligeramente diferente:
 </br>
 #bash
 </br>
-source nombre_del_entorno/bin/activate
+**source nombre_del_entorno/bin/activate**
+</details>
+<details>
 <summary>4b. Desactivar el Entorno Virtual:</summary>
 Cuando hayas terminado de trabajar en el entorno virtual, puedes desactivarlo ejecutando el siguiente comando en Git Bash:
 </br>
 #bash
 </br>
-deactivate
+**deactivate**
+<details>
+</details>
 <summary>5. Clonar repositorio:</summary>
 Situarse en directorio deseado y ejecutar:
 </br>
 #bash
 </br>
-git init
+**git init**
 </br>
-git clone https://github.com/JDGA1997/Grupo-7-TSCDIA.git 
+**git clone https://github.com/JDGA1997/Grupo-7-TSCDIA.git**
+</details>
+<details>
 <summary>6. Instalar librerías necesarias:</summary>
 #bash
 </br>
-pip3 install -r requirements.txt
+**pip3 install -r requirements.txt**
+</details>
+<details>
 <summary>7. Ejecutar la aplicación:</summary>
 #bash
 </br>
-python interfase.py
+**python interfase.py**
+</details>
 
 </br>
 
